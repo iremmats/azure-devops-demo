@@ -26,5 +26,6 @@ stages:
 - template: pipelines/pipeline-gitops.yaml@templates
   parameters:
     applicationName: demoapp
+    repository: 'iremmats/hello-world'
 
 
