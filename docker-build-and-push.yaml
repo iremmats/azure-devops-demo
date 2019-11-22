@@ -8,7 +8,7 @@ trigger:
 
 variables:
 - group: release-common
-- name: path_in_configuration_repo
+- name: path_in_git_configuration_repo
   value: 05/demoapp
 
 pool:
