@@ -12,7 +12,7 @@ pool:
 steps:
 - script: |
       echo "##vso[task.setvariable variable=image_tag] $(Build.SourceBranchName)-$(git log -n 1 --pretty=format:'%h')"
-    displayName: 'Get docker image tag'
+  displayName: 'Get docker image tag'
 
 - task: Docker@2
   inputs:
