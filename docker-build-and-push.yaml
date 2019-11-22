@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+      echo "##vso[task.setvariable variable=image_tag] $(Build.SourceBranchName)-$(git log -n 1 --pretty=format:'%h')"
+    displayName: 'Get docker image tag'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker-hub'
+    repository: 'iremmats/hello-world'
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+    tags: '$(image_tag)'
+    
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker-hub'
+    repository: 'iremmats/hello-world'
+    command: 'push'
+    tags: '$(image_tag)'
+
+
